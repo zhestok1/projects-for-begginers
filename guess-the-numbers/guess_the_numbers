@@ -1,0 +1,44 @@
+// Игра - "Угадай число"
+
+#include <iostream>
+#include <stdlib.h>
+#include <limits>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "RU");
+    srand(time(0));
+
+    cout << "Добро пожаловать в игру 'Угадай число'!" << endl;
+
+    int answer;
+    char y;
+    bool yes = true;
+    do {
+
+        std::cout << "Введите число от 1 до 10: ";
+        while (!(std::cin >> answer) || answer < 1 || answer > 10 || cin.peek() != '\n') {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Неверный ввод. Пожалуйста, введите число от 1 до 10: " << endl;
+        }
+
+        int rez = rand() % 10 + 1; 
+        if (rez == answer) {
+            cout << "Вы угадали!" << endl;
+        }
+        else {
+            cout << "Вы не угадали, ответом было число " << rez << "!" << endl;
+        }
+
+        cout << "Вы хотите сыграть ещё раз? (y/n)" << endl;
+        cin >> y;
+        if (y == 'n' || y == 'N') { 
+            cout << "Игра завершена!";
+            yes = false;
+        }
+    } while (yes);
+
+    return 0;
+}
